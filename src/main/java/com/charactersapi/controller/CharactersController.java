@@ -40,7 +40,7 @@ public class CharactersController {
     @GetMapping(value = "/{characterId}")
     private ResponseEntity findById(@PathVariable Integer characterId){
         Optional<Character> character = characterService.findById(characterId);
-        if(!character.isEmpty()){
+        if(!character.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(character);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Character not found.");
