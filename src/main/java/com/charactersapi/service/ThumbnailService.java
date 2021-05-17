@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Created by  Marília
@@ -23,9 +22,6 @@ public class ThumbnailService {
     public void insert(Thumbnail thumbnail){
         thumbnail.setId(null == thumbnailRepository.findMaxId()? 0 : thumbnailRepository.findMaxId() + 1);
         thumbnailRepository.save(thumbnail);
-    }
-    public List<Thumbnail> findAll(){
-        return thumbnailRepository.findAll();
     }
 
 }

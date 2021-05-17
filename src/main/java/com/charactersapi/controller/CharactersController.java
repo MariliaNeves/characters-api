@@ -2,7 +2,7 @@ package com.charactersapi.controller;
 
 import com.charactersapi.entity.Activity;
 import com.charactersapi.entity.Character;
-import com.charactersapi.enuns.EnumTipoActivity;
+import com.charactersapi.enuns.EnumTypeActivity;
 import com.charactersapi.service.ActivityService;
 import com.charactersapi.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public class CharactersController {
 
     @GetMapping(value = "/{characterId}/comics")
     private ResponseEntity findByIdComics(@PathVariable Integer characterId){
-        List<Activity> activityList = activityService.findByIdCharacter(characterId, EnumTipoActivity.COMICS.getValue());
+        List<Activity> activityList = activityService.findByIdCharactertypeActivity(characterId, EnumTypeActivity.COMICS.getValue());
         if(!activityList.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(activityList);
         }else{
@@ -60,7 +60,7 @@ public class CharactersController {
 
     @GetMapping(value = "/{characterId}/events")
     private ResponseEntity findByIdEvents(@PathVariable Integer characterId){
-        List<Activity> activityList = activityService.findByIdCharacter(characterId, EnumTipoActivity.EVENTS.getValue());
+        List<Activity> activityList = activityService.findByIdCharactertypeActivity(characterId, EnumTypeActivity.EVENTS.getValue());
         if(!activityList.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(activityList);
         }else{
@@ -70,7 +70,7 @@ public class CharactersController {
 
     @GetMapping(value = "/{characterId}/series")
     private ResponseEntity findByIdSeries(@PathVariable Integer characterId){
-        List<Activity> activityList = activityService.findByIdCharacter(characterId, EnumTipoActivity.SERIES.getValue());
+        List<Activity> activityList = activityService.findByIdCharactertypeActivity(characterId, EnumTypeActivity.SERIES.getValue());
         if(!activityList.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(activityList);
         }else{
@@ -80,7 +80,7 @@ public class CharactersController {
 
     @GetMapping(value = "/{characterId}/stories")
     private ResponseEntity findByIdStories(@PathVariable Integer characterId){
-        List<Activity> activityList = activityService.findByIdCharacter(characterId, EnumTipoActivity.STORIES.getValue());
+        List<Activity> activityList = activityService.findByIdCharactertypeActivity(characterId, EnumTypeActivity.STORIES.getValue());
         if(!activityList.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(activityList);
         }else{

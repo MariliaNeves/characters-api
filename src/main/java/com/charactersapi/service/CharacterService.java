@@ -1,7 +1,7 @@
 package com.charactersapi.service;
 
 import com.charactersapi.entity.Character;
-import com.charactersapi.enuns.EnumTipoActivity;
+import com.charactersapi.enuns.EnumTypeActivity;
 import com.charactersapi.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,6 @@ public class CharacterService {
     private CharacterRepository characterRepository;
 
     @Autowired
-    private ItemService itemService;
-
-    @Autowired
     private ActivityService activityService;
 
     @Autowired
@@ -35,57 +32,39 @@ public class CharacterService {
 
     @Transactional
     public void insert(Character character){
-        //comics
-        itemService.saveAll(character.getComics().getItems());
-        character.getComics().setTipoActivity(EnumTipoActivity.COMICS.getValue());
-        activityService.insert(character.getComics());
-        itemService.updateAll(character.getComics().getItems());
-
-        //series
-        itemService.saveAll(character.getSeries().getItems());
-        character.getSeries().setTipoActivity(EnumTipoActivity.SERIES.getValue());
-        activityService.insert(character.getSeries());
-        itemService.updateAll(character.getSeries().getItems());
-
-        //events
-        itemService.saveAll(character.getEvents().getItems());
-        character.getEvents().setTipoActivity(EnumTipoActivity.EVENTS.getValue());
-        activityService.insert(character.getEvents());
-        itemService.updateAll(character.getEvents().getItems());
-
-        //stories
-        itemService.saveAll(character.getStories().getItems());
-        character.getStories().setTipoActivity(EnumTipoActivity.STORIES.getValue());
-        activityService.insert(character.getStories());
-        itemService.updateAll(character.getStories().getItems());
-
+        saveItensByActivities(character);
         urlService.saveAll(character.getUrls());
         thumbnailService.insert(character.getThumbnail());
         character.setId(null == characterRepository.findMaxId()? 0 : characterRepository.findMaxId() + 1);
         characterRepository.save(character);
+        updateAllActivities(character);
 
-        //comics
-        character.getComics().setCharacter(character);
-        activityService.update(character.getComics());
-
-        //series
-        character.getSeries().setCharacter(character);
-        activityService.update(character.getSeries());
-
-        //events
-        character.getEvents().setCharacter(character);
-        activityService.update(character.getEvents());
-
-        //stories
-        character.getStories().setCharacter(character);
-        activityService.update(character.getStories());
     }
 
     public List<Character> findAll(){
-       return characterRepository.findAll();
+        return characterRepository.findAll();
     }
 
     public Optional<Character> findById(Integer id){
         return characterRepository.findById(id);
     }
+
+    private void saveItensByActivities(Character character) {
+        activityService.saveByTypeActivity(character.getComics(), EnumTypeActivity.COMICS);
+        activityService.saveByTypeActivity(character.getSeries(), EnumTypeActivity.SERIES);
+        activityService.saveByTypeActivity(character.getEvents(), EnumTypeActivity.EVENTS);
+        activityService.saveByTypeActivity(character.getStories(), EnumTypeActivity.STORIES);
+    }
+
+    private void updateAllActivities(Character character) {
+        character.getComics().setCharacter(character);
+        activityService.update(character.getComics());
+        character.getSeries().setCharacter(character);
+        activityService.update(character.getSeries());
+        character.getEvents().setCharacter(character);
+        activityService.update(character.getEvents());
+        character.getStories().setCharacter(character);
+        activityService.update(character.getStories());
+    }
+
 }

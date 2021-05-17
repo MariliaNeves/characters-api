@@ -27,12 +27,4 @@ public class ItemService {
         return itemRepository.saveAll(itemList);
     }
 
-    public List<Item> findAll(){
-        return itemRepository.findAll();
-    }
-
-    public void  updateAll(List<Item> itens){
-        itemRepository.saveAll(itens);
-    }
-
 }

@@ -1,6 +1,6 @@
 package com.charactersapi.enuns;
 
-public enum EnumTipoActivity {
+public enum EnumTypeActivity {
 
     COMICS(1, "Comics"),
     EVENTS(2, "Events"),
@@ -10,7 +10,7 @@ public enum EnumTipoActivity {
     private int value;
     private String nome;
 
-    public static EnumTipoActivity getEnum(int value){
+    public static EnumTypeActivity getEnum(int value){
         switch (value){
             case 1:
                 return COMICS;
@@ -25,7 +25,7 @@ public enum EnumTipoActivity {
         }
     }
 
-    EnumTipoActivity(int value, String nome) {
+    EnumTypeActivity(int value, String nome) {
         this.value = value;
         this.nome = nome;
     }

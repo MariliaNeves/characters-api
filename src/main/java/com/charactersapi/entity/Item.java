@@ -1,8 +1,7 @@
 package com.charactersapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Created by  Marília
@@ -16,11 +15,6 @@ public class Item {
     public Integer id;
     public String resourceURI;
     public String name;
-
-    @ManyToOne(optional = true, fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "id_activity", referencedColumnName = "id", nullable = true)
-    @JsonBackReference
-    public Activity activity;
 
     public Integer getId() {
         return id;
@@ -46,11 +40,5 @@ public class Item {
         this.name = name;
     }
 
-    public Activity getActivity() {
-        return activity;
-    }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
 }

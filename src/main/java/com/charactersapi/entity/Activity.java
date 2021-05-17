@@ -28,7 +28,7 @@ public class Activity {
     public Character character;
 
     @JsonBackReference
-    public Integer tipoActivity;
+    public Integer typeActivity;
 
     public Integer getId() {
         return id;
@@ -78,11 +78,11 @@ public class Activity {
         this.character = character;
     }
 
-    public Integer getTipoActivity() {
-        return tipoActivity;
+    public Integer getTypeActivity() {
+        return typeActivity;
     }
 
-    public void setTipoActivity(Integer tipoActivity) {
-        this.tipoActivity = tipoActivity;
+    public void setTypeActivity(Integer typeActivity) {
+        this.typeActivity = typeActivity;
     }
 }
