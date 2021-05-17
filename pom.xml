@@ -63,7 +63,6 @@
 				<version>3.0.3</version>
 				<configuration>
 					<appName>characters-api01</appName>
-					<jdkVersion>11</jdkVersion>
 					<processTypes>
 						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
 					</processTypes>
